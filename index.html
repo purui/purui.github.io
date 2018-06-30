@@ -153,91 +153,10 @@
     <div class="article-entry" itemprop="articleBody">
       
         <h1 id="ActiveMq-入门"><a href="#ActiveMq-入门" class="headerlink" title="ActiveMq 入门"></a>ActiveMq 入门</h1><p>首先我们需要下载 ActiveMq 然后双击activemq.bat 启动 ActiveMq</p>
-<p><img src="https://static.oschina.net/uploads/space/2017/0817/164714_tb08_3394890.png" alt="image"></p>
-<p>如下启动成功！<br><img src="https://static.oschina.net/uploads/space/2017/0817/164828_KyAW_3394890.png" alt="image"></p>
-<p>然后访问 <a href="http://localhost:8161/admin/" target="_blank" rel="noopener">http://localhost:8161/admin/</a>    ActiveMq提供的一个管理界面</p>
-<p><img src="https://static.oschina.net/uploads/space/2017/0817/164925_aKLs_3394890.png" alt="image"></p>
-<p>然后 我使用JAVA来操作<br>首先,我们创一个 消息发送者</p>
-<pre><code>public class Sender {
-    public static void main(String[] args) throws JMSException {
-        ActiveMQConnectionFactory activeMQConnectionFactory = new ActiveMQConnectionFactory(
-                ActiveMQConnectionFactory.DEFAULT_USER,
-                ActiveMQConnectionFactory.DEFAULT_PASSWORD,
-                ActiveMQConnectionFactory.DEFAULT_BROKER_URL);
-        //创建一个连接
-        Connection connection = activeMQConnectionFactory.createConnection();
-        //开启连接
-        connection.start();
-        //创建会话
-        // 1.是否启动 事务    2.签收模式
-        Session session = connection.createSession(Boolean.FALSE, Session.AUTO_ACKNOWLEDGE);
-        //创建 一个队列
-        Destination destination = session.createQueue(&quot;queue1&quot;);
-        //通过 session 创建 发送消息的生产者/接收消息的 消费者
-        MessageProducer producer = session.createProducer(destination);
-        //设置持久化
-        producer.setDeliveryMode(DeliveryMode.NON_PERSISTENT);
-        TextMessage textMessage = session.createTextMessage();
-        textMessage.setText(&quot;hello active!&quot;);
-        //发送
-        producer.send(textMessage);
-        //释放资源
-        if(null != connection){
-            connection.close();
-        }
-    }
-}
-</code></pre><p>当然我们也需要一个接收者 </p>
-<pre><code>public class Receiver {
-    public static void main(String[] args) {
-        // ConnectionFactory ：连接工厂，JMS 用它创建连接
-        ConnectionFactory connectionFactory;
-        // Connection ：JMS 客户端到JMS Provider 的连接
-        Connection connection = null;
-        // Session： 一个发送或接收消息的线程
-        Session session;
-        // Destination ：消息的目的地;消息发送给谁.
-        Destination destination;
-        // 消费者，消息接收者
-        MessageConsumer consumer;
-        connectionFactory = new ActiveMQConnectionFactory(
-                ActiveMQConnection.DEFAULT_USER,
-                ActiveMQConnection.DEFAULT_PASSWORD,
-                ActiveMQConnectionFactory.DEFAULT_BROKER_URL);
-        try {
-            // 构造从工厂得到连接对象
-            connection = connectionFactory.createConnection();
-            // 启动
-            connection.start();
-            // 获取操作连接
-            session = connection.createSession(Boolean.FALSE,
-                    Session.AUTO_ACKNOWLEDGE);
-            destination = session.createQueue(&quot;queue1&quot;);
-            consumer = session.createConsumer(destination);
-            while (true) {
-                //设置接收者接收消息的时间，为了便于测试，这里谁定为100s
-                TextMessage message = (TextMessage) consumer.receive(100000);
-                if (null != message) {
-                    System.out.println(&quot;收到消息&quot; + message.getText());
-                } else {
-                    break;
-                }
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        } finally {
-            try {
-                if (null != connection)
-                    connection.close();
-            } catch (Throwable ignore) {
-            }
-        }
-    }
-}
-</code></pre><p>运行结果</p>
-<p><img src="https://static.oschina.net/uploads/space/2017/0817/165120_qElJ_3394890.png" alt="image"></p>
-<p>代码-》》 <a href="https://git.oschina.net/zprsss/ActiveMqDemo.git" target="_blank" rel="noopener">https://git.oschina.net/zprsss/ActiveMqDemo.git</a></p>
-
+<p><img src="https://static.oschina.net/uploads/space/2017/0817/164714_tb08_3394890.png" alt="image"><br>
+        
+          <a class="article-more-a" href="/2018/06/30/ActiveMq 入门/#more">more >></a>
+        
       
 
       
