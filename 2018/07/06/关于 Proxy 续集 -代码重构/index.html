@@ -6,19 +6,22 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="https://bestpurui.cn">
-  <title>Tag: JAVA | purui</title>
+  <title>关于 Proxy 续集 -代码重构 | purui</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="记录个人成长与技术的博客">
-<meta name="keywords" content="java,技术分享,记录个人成长">
-<meta property="og:type" content="website">
-<meta property="og:title" content="purui">
-<meta property="og:url" content="https://bestpurui.cn/tags/JAVA/index.html">
+  <meta name="description" content="上篇文章我们说了静态代理，那么有静态代理自然也就有动态代理咯，这次我们主要说 javaJDK给我提供的 一套动态代理。 老规矩先看代码, 接口类： 123public interface Hello &amp;#123;    public void say(String name);&amp;#125; //实现类 123456789101112public class HelloImpl implements">
+<meta name="keywords" content="JAVA,Aop">
+<meta property="og:type" content="article">
+<meta property="og:title" content="关于 Proxy 续集 -代码重构">
+<meta property="og:url" content="https://bestpurui.cn/2018/07/06/关于 Proxy 续集 -代码重构/index.html">
 <meta property="og:site_name" content="purui">
-<meta property="og:description" content="记录个人成长与技术的博客">
+<meta property="og:description" content="上篇文章我们说了静态代理，那么有静态代理自然也就有动态代理咯，这次我们主要说 javaJDK给我提供的 一套动态代理。 老规矩先看代码, 接口类： 123public interface Hello &amp;#123;    public void say(String name);&amp;#125; //实现类 123456789101112public class HelloImpl implements">
 <meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="http://img.baidu.com/hi/jx2/j_0035.gif">
+<meta property="og:updated_time" content="2018-07-06T09:49:50.356Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="purui">
-<meta name="twitter:description" content="记录个人成长与技术的博客">
+<meta name="twitter:title" content="关于 Proxy 续集 -代码重构">
+<meta name="twitter:description" content="上篇文章我们说了静态代理，那么有静态代理自然也就有动态代理咯，这次我们主要说 javaJDK给我提供的 一套动态代理。 老规矩先看代码, 接口类： 123public interface Hello &amp;#123;    public void say(String name);&amp;#125; //实现类 123456789101112public class HelloImpl implements">
+<meta name="twitter:image" content="http://img.baidu.com/hi/jx2/j_0035.gif">
   
     <link rel="alternative" href="/atom.xml" title="purui" type="application/atom+xml">
   
@@ -144,36 +147,74 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
+            <article id="post-关于 Proxy 续集 -代码重构" class="article article-type-post " itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
   
+    <h1 class="article-title" itemprop="name">
+      关于 Proxy 续集 -代码重构
+    </h1>
   
-    
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2018" class="archive-year">2018</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2018/07/06/关于 Proxy 续集 -代码重构/" class="archive-article-date">
+
+        
+        <a href="/2018/07/06/关于 Proxy 续集 -代码重构/" class="archive-article-date">
   	<time datetime="2018-07-06T10:01:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-07-06</time>
 </a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2018/07/06/关于 Proxy 续集 -代码重构/">关于 Proxy 续集 -代码重构</a>
-    </h1>
-  
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>上篇文章我们说了静态代理，那么有静态代理自然也就有动态代理咯，这次我们主要说 javaJDK给我提供的 一套动态代理。</p>
+<pre><code>老规矩先看代码,
+</code></pre><p>接口类：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">public interface Hello &#123;</span><br><span class="line">    public void say(String name);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>//实现类</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">public class HelloImpl implements Hello&#123;</span><br><span class="line">    @Override</span><br><span class="line">    public void say(String name) &#123;</span><br><span class="line">        System.out.println(name);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public static void main(String[] args)&#123;</span><br><span class="line">        DynamicProxy dynamicProxy = new DynamicProxy(new HelloImpl());</span><br><span class="line">        Hello proxy = dynamicProxy.getProxy();</span><br><span class="line">        proxy.say(&quot;一战成佛&quot;);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>动态代理类</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">public class DynamicProxy implements InvocationHandler&#123;</span><br><span class="line">    private Object object;</span><br><span class="line">    public DynamicProxy(Object object)&#123;</span><br><span class="line">        this.object = object;</span><br><span class="line">    &#125;</span><br><span class="line">    @SuppressWarnings(&quot;unchecked&quot;)</span><br><span class="line">    public &lt;T&gt; T getProxy()&#123;</span><br><span class="line">        return (T)Proxy.newProxyInstance(object.getClass().getClassLoader(),object.getClass().getInterfaces(),this);</span><br><span class="line">    &#125;</span><br><span class="line">    @Override</span><br><span class="line">    public Object invoke(Object proxy, Method method, Object[] args) throws Throwable &#123;</span><br><span class="line">        berofe();</span><br><span class="line">        Object invoke = method.invoke(object, args);</span><br><span class="line">        after();</span><br><span class="line">        return invoke;</span><br><span class="line">    &#125;</span><br><span class="line">    public void berofe()&#123;</span><br><span class="line">        System.out.println(&quot;before&quot;);</span><br><span class="line">    &#125;</span><br><span class="line">    public void after()&#123;</span><br><span class="line">        System.out.println(&quot;after&quot;);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>根据注释 很好理解 动态代理，总结下 java提供的动态代理</p>
+<pre><code>优点:
 
-        <div class="article-info info-on-right">
-          
+    1.被代理类变动，代理不需要变动
+
+    2.更加灵活
+
+缺点:
+
+    1.依赖接口，必须要有接口 才能代理 被代理对象
+</code></pre><p>万一 需要代理的对象没有接口，那就玩玩拉，所以下一篇 开始说CGLIB 这也是springAop实现动态代理的依赖，等着感受它的强大魅力吧<img src="http://img.baidu.com/hi/jx2/j_0035.gif" alt="image"></p>
+
+      
+
+      
+        <div class="page-reward">
+          <a href="javascript:;" class="page-reward-btn tooltip-top">
+            <div class="tooltip tooltip-east">
+            <span class="tooltip-item">
+              赏
+            </span>
+            <span class="tooltip-content">
+              <span class="tooltip-text">
+                <span class="tooltip-inner">
+                  <p class="reward-p"><i class="icon icon-quo-left"></i>嘿嘿,谢谢您的赏识<i class="icon icon-quo-right"></i></p>
+                  <div class="reward-box">
+                    
+                    
+                  </div>
+                </span>
+              </span>
+            </span>
+          </div>
+          </a>
+        </div>
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags icon"></i>
 		<ul class="article-tag-list">
@@ -189,7 +230,10 @@
 		</ul>
 	</div>
 
-          
+      <span id="busuanzi_container_page_pv">
+	|阅读量(<span id="busuanzi_value_page_pv"></span>)
+	</span>
+      
 	<div class="article-category tagcloud">
 		<i class="icon-book icon"></i>
 		<ul class="article-tag-list">
@@ -202,229 +246,127 @@
 	</div>
 
 
+      
+
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
         </div>
-        <div class="clearfix"></div>
-    </header>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//pan.baidu.com/share/qrcode?url=https://bestpurui.cn/2018/07/06/关于 Proxy 续集 -代码重构/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
+      
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
+
   
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2018/07/05/关于 Proxy/" class="archive-article-date">
-  	<time datetime="2018-07-05T10:01:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-07-05</time>
-</a>
+<nav id="article-nav">
+  
+  
+    <a href="/2018/07/05/关于 Proxy/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">关于 Proxy</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
         </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2018/07/05/关于 Proxy/">关于 Proxy</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">JAVA</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">Aop</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/Proxy//" class="article-tag-list-link color1">Proxy</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
+        
+        
+        <div class="toc-container tooltip-left">
+            <i class="icon-font icon-category"></i>
+            <div class="tooltip tooltip-east">
+                <span class="tooltip-item">
+                </span>
+                <span class="tooltip-content">
+                    <div class="toc-article">
+                    目录，不存在的…
+                    </div>
+                </span>
+            </div>
         </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2018/07/04/springBoot admin 实现对springboot项目的监控-实战/" class="archive-article-date">
-  	<time datetime="2018-07-04T03:30:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-07-04</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2018/07/04/springBoot admin 实现对springboot项目的监控-实战/">springBoot admin 实现对springboot项目的监控-实战</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">JAVA</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">springBoot</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/安全监控//" class="article-tag-list-link color5">安全监控</a>
-        		</li>
-      		
-		</ul>
-	</div>
+        
+    </div>
+</aside>
 
 
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2018/07/02/Mybatis 传参的方式/" class="archive-article-date">
-  	<time datetime="2018-07-02T06:14:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-07-02</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2018/07/02/Mybatis 传参的方式/">Mybatis 传参的方式</a>
-    </h1>
-  
 
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">JAVA</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">数据库</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/Mybatis//" class="article-tag-list-link color3">Mybatis</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2018/06/30/ActiveMq 入门/" class="archive-article-date">
-  	<time datetime="2018-06-30T06:14:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-06-30</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2018/06/30/ActiveMq 入门/">ActiveMq 入门</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">ActiveMq</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">JAVA</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/消息队列//" class="article-tag-list-link color5">消息队列</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
   
   
-    </div></section>
   
 
-    
+  
+  <div id="SOHUCS" sid="关于 Proxy 续集 -代码重构" ></div> 
+<script charset="utf-8" type="text/javascript" src="//changyan.sohu.com/upload/changyan.js" ></script>
+<script type="text/javascript">
+    window.changyan.api.config({
+        appid: "cytHeFrqx",
+        conf: "prod_40cd1555815b1262ee40073493b355fb"
+    });
+</script>
+</script>
+  
+
+  
+
+  
 
 
           </div>
@@ -456,9 +398,9 @@
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: false,
+		isPost: true,
 		isArchive: false,
-		isTag: true,
+		isTag: false,
 		isCategory: false,
 		open_in_new: false,
 		toc_hide_index: true,

@@ -146,6 +146,116 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-关于 Proxy 续集 -代码重构" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/07/06/关于 Proxy 续集 -代码重构/">关于 Proxy 续集 -代码重构</a>
+    </h1>
+  
+
+        
+        <a href="/2018/07/06/关于 Proxy 续集 -代码重构/" class="archive-article-date">
+  	<time datetime="2018-07-06T10:01:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-07-06</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>上篇文章我们说了静态代理，那么有静态代理自然也就有动态代理咯，这次我们主要说 javaJDK给我提供的 一套动态代理。</p>
+<pre><code>老规矩先看代码,
+</code></pre><p>接口类：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">public interface Hello &#123;</span><br><span class="line">    public void say(String name);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>//实现类</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">public class HelloImpl implements Hello&#123;</span><br><span class="line">    @Override</span><br><span class="line">    public void say(String name) &#123;</span><br><span class="line">        System.out.println(name);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public static void main(String[] args)&#123;</span><br><span class="line">        DynamicProxy dynamicProxy = new DynamicProxy(new HelloImpl());</span><br><span class="line">        Hello proxy = dynamicProxy.getProxy();</span><br><span class="line">        proxy.say(&quot;一战成佛&quot;);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>动态代理类</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">public class DynamicProxy implements InvocationHandler&#123;</span><br><span class="line">    private Object object;</span><br><span class="line">    public DynamicProxy(Object object)&#123;</span><br><span class="line">        this.object = object;</span><br><span class="line">    &#125;</span><br><span class="line">    @SuppressWarnings(&quot;unchecked&quot;)</span><br><span class="line">    public &lt;T&gt; T getProxy()&#123;</span><br><span class="line">        return (T)Proxy.newProxyInstance(object.getClass().getClassLoader(),object.getClass().getInterfaces(),this);</span><br><span class="line">    &#125;</span><br><span class="line">    @Override</span><br><span class="line">    public Object invoke(Object proxy, Method method, Object[] args) throws Throwable &#123;</span><br><span class="line">        berofe();</span><br><span class="line">        Object invoke = method.invoke(object, args);</span><br><span class="line">        after();</span><br><span class="line">        return invoke;</span><br><span class="line">    &#125;</span><br><span class="line">    public void berofe()&#123;</span><br><span class="line">        System.out.println(&quot;before&quot;);</span><br><span class="line">    &#125;</span><br><span class="line">    public void after()&#123;</span><br><span class="line">        System.out.println(&quot;after&quot;);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>根据注释 很好理解 动态代理，总结下 java提供的动态代理</p>
+<pre><code>优点:
+
+    1.被代理类变动，代理不需要变动
+
+    2.更加灵活
+
+缺点:
+
+    1.依赖接口，必须要有接口 才能代理 被代理对象
+</code></pre><p>万一 需要代理的对象没有接口，那就玩玩拉，所以下一篇 开始说CGLIB 这也是springAop实现动态代理的依赖，等着感受它的强大魅力吧<img src="http://img.baidu.com/hi/jx2/j_0035.gif" alt="image"></p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">JAVA</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">Aop</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      <span id="busuanzi_container_page_pv">
+	|阅读量(<span id="busuanzi_value_page_pv"></span>)
+	</span>
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/Proxy//" class="article-tag-list-link color1">Proxy</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2018/07/06/关于 Proxy 续集 -代码重构/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-关于 Proxy" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
