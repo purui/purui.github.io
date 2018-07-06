@@ -8,19 +8,19 @@
   <link rel="dns-prefetch" href="https://bestpurui.cn">
   <title>关于 Proxy 续集 -代码重构 | purui</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="上篇文章我们说了静态代理，那么有静态代理自然也就有动态代理咯，这次我们主要说 javaJDK给我提供的 一套动态代理。 老规矩先看代码, 接口类： 123public interface Hello &amp;#123;    public void say(String name);&amp;#125; //实现类 123456789101112public class HelloImpl implements">
+  <meta name="description" content="上篇文章我们说了静态代理，那么有静态代理自然也就有动态代理咯，这次我们主要说 javaJDK给我提供的 一套动态代理。 老规矩先看代码, 接口类： 123public interface Hello &amp;#123;    public void say(String name);&amp;#125;">
 <meta name="keywords" content="JAVA,Aop">
 <meta property="og:type" content="article">
 <meta property="og:title" content="关于 Proxy 续集 -代码重构">
 <meta property="og:url" content="https://bestpurui.cn/2018/07/06/关于 Proxy 续集 -代码重构/index.html">
 <meta property="og:site_name" content="purui">
-<meta property="og:description" content="上篇文章我们说了静态代理，那么有静态代理自然也就有动态代理咯，这次我们主要说 javaJDK给我提供的 一套动态代理。 老规矩先看代码, 接口类： 123public interface Hello &amp;#123;    public void say(String name);&amp;#125; //实现类 123456789101112public class HelloImpl implements">
+<meta property="og:description" content="上篇文章我们说了静态代理，那么有静态代理自然也就有动态代理咯，这次我们主要说 javaJDK给我提供的 一套动态代理。 老规矩先看代码, 接口类： 123public interface Hello &amp;#123;    public void say(String name);&amp;#125;">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="http://img.baidu.com/hi/jx2/j_0035.gif">
-<meta property="og:updated_time" content="2018-07-06T09:49:50.356Z">
+<meta property="og:updated_time" content="2018-07-06T10:03:38.330Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="关于 Proxy 续集 -代码重构">
-<meta name="twitter:description" content="上篇文章我们说了静态代理，那么有静态代理自然也就有动态代理咯，这次我们主要说 javaJDK给我提供的 一套动态代理。 老规矩先看代码, 接口类： 123public interface Hello &amp;#123;    public void say(String name);&amp;#125; //实现类 123456789101112public class HelloImpl implements">
+<meta name="twitter:description" content="上篇文章我们说了静态代理，那么有静态代理自然也就有动态代理咯，这次我们主要说 javaJDK给我提供的 一套动态代理。 老规矩先看代码, 接口类： 123public interface Hello &amp;#123;    public void say(String name);&amp;#125;">
 <meta name="twitter:image" content="http://img.baidu.com/hi/jx2/j_0035.gif">
   
     <link rel="alternative" href="/atom.xml" title="purui" type="application/atom+xml">
@@ -171,6 +171,7 @@
 <pre><code>老规矩先看代码,
 </code></pre><p>接口类：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">public interface Hello &#123;</span><br><span class="line">    public void say(String name);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<a id="more"></a>
 <p>//实现类</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">public class HelloImpl implements Hello&#123;</span><br><span class="line">    @Override</span><br><span class="line">    public void say(String name) &#123;</span><br><span class="line">        System.out.println(name);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public static void main(String[] args)&#123;</span><br><span class="line">        DynamicProxy dynamicProxy = new DynamicProxy(new HelloImpl());</span><br><span class="line">        Hello proxy = dynamicProxy.getProxy();</span><br><span class="line">        proxy.say(&quot;一战成佛&quot;);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>动态代理类</p>
