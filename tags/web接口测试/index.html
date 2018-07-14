@@ -6,13 +6,13 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="https://bestpurui.cn">
-  <title>purui</title>
+  <title>Tag: web接口测试 | purui</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <meta name="description" content="记录个人成长与技术的博客">
 <meta name="keywords" content="java,技术分享,记录个人成长">
 <meta property="og:type" content="website">
 <meta property="og:title" content="purui">
-<meta property="og:url" content="https://bestpurui.cn/index.html">
+<meta property="og:url" content="https://bestpurui.cn/tags/web接口测试/index.html">
 <meta property="og:site_name" content="purui">
 <meta property="og:description" content="记录个人成长与技术的博客">
 <meta property="og:locale" content="zh-CN">
@@ -146,48 +146,34 @@
           <div id="js-content" class="content-ll">
             
   
-    <article id="post-利用Apache Bench 测试Web项目性能(1)" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
+  
     
-      <header class="article-header">
-        
+    
+      
+      
+      <section class="archives-wrap">
+        <div class="archive-year-wrap">
+          <a href="/archives/2018" class="archive-year">2018</a>
+        </div>
+        <div class="archives">
+    
+    <article class="archive-article archive-type-post">
+  <div class="archive-article-inner">
+    <header class="archive-article-header">
+      	<div class="article-meta">
+	      	<a href="/2018/07/14/利用Apache Bench 测试Web项目性能(1)/" class="archive-article-date">
+  	<time datetime="2018-07-14T10:01:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-07-14</time>
+</a>
+        </div>
+    	 
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2018/07/14/利用Apache Bench 测试Web项目性能(1)/">利用Apache Bench 测试Web项目性能</a>
+      <a class="archive-article-title" href="/2018/07/14/利用Apache Bench 测试Web项目性能(1)/">利用Apache Bench 测试Web项目性能</a>
     </h1>
   
 
-        
-        <a href="/2018/07/14/利用Apache Bench 测试Web项目性能(1)/" class="archive-article-date">
-  	<time datetime="2018-07-14T10:01:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-07-14</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>Apache Bench是著名Web服务器软件apache附带的一个小工具，它可以同时模拟多个并发请求，测试apache等Web服务器的最大承载压力，来实现对项目的性能测试，我们可以根据需要来调整参数，当然这东西 也有可能是一个攻击的工具。 </p>
-<pre><code>==测试测试自己的服务器就好了==
-</code></pre><p>Centos 环境下安装：</p>
-<p>执行 </p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum install httpd</span><br></pre></td></tr></table></figure>
-<p>即可安装成功！</p>
-<p>接下来我们可以来开始我们的测试：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ab -n 100 -c 100 http://www.abc.com/</span><br></pre></td></tr></table></figure>
-<p>-n 后面 –  执行请求的数量</p>
-<p>-c 后面 – 每个请求的并发连接数</p>
-<p>-t 后面 – 等待响应时间</p>
-<p><img src="https://static.oschina.net/uploads/space/2017/0819/203134_va2L_3394890.png" alt="image"></p>
-<p>参数说明:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line">Server Software:        nginx/1.0.10 #Web服务器引擎</span><br><span class="line">Server Hostname:        www.abc.com   #服务器地址</span><br><span class="line">Server Port:            80           #服务器端口</span><br><span class="line"></span><br><span class="line">Document Path:          /            #请求的文件路径</span><br><span class="line">Document Length:        20718 bytes  #文件大小</span><br><span class="line"></span><br><span class="line">Concurrency Level:      1020         #并发次数</span><br><span class="line">Time taken for tests:   20.6751 seconds #测试所需时间</span><br><span class="line">Complete requests:      130          #成功请求次数</span><br><span class="line">Failed requests:        0            #失败请求次数</span><br><span class="line">Write errors:           0            #写入错误</span><br><span class="line">Total transferred:      3041510 bytes #测试过程传输字节数</span><br><span class="line">HTML transferred:       2957081 bytes #HTML内容传输字节数</span><br><span class="line">Requests per second:    6.50 [#/sec] (mean) #平均返回数据时间</span><br><span class="line">Time per request:       156976.039 [ms] (mean) #平均响应时间</span><br><span class="line">Time per request:       153.898 [ms] (mean, across all concurrent requests)</span><br><span class="line">#平均并发请求时间</span><br><span class="line">Transfer rate:          148.45 [Kbytes/sec] received #平均传输速率</span><br><span class="line"></span><br><span class="line">Connection Times (ms)   #响应时间小、中、大值</span><br><span class="line">              min  mean[+/-sd] median   max</span><br><span class="line">Connect:      322  346  18.0    338     401</span><br><span class="line">Processing:  1344 8898 4081.5   9795   19341</span><br><span class="line">Waiting:      669 7629 3782.7   8802   18617</span><br><span class="line">Total:       1682 9245 4087.6  10148   19684</span><br><span class="line"></span><br><span class="line">Percentage of the requests served within a certain time (ms)</span><br><span class="line">  50%  10148</span><br><span class="line">  66%  11054</span><br><span class="line">  75%  11567</span><br><span class="line">  80%  12797</span><br><span class="line">  90%  14636</span><br><span class="line">  95%  15551</span><br><span class="line">  98%  16834</span><br><span class="line">  99%  18119</span><br><span class="line"> 100%  19684 (longest request)</span><br><span class="line">#以上为所有请求的平均速度，如在测试过程中进度到50%时平均响应时间为10148ms，到100%时</span><br><span class="line">平均响应时间为19684 ms。</span><br></pre></td></tr></table></figure>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
+        <div class="article-info info-on-right">
+          
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags icon"></i>
 		<ul class="article-tag-list">
@@ -203,7 +189,7 @@
 		</ul>
 	</div>
 
-      
+          
 	<div class="article-category tagcloud">
 		<i class="icon-book icon"></i>
 		<ul class="article-tag-list">
@@ -216,501 +202,17 @@
 	</div>
 
 
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2018/07/14/利用Apache Bench 测试Web项目性能(1)/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
+        </div>
+        <div class="clearfix"></div>
+    </header>
   </div>
 </article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
   
-    <article id="post-关于 Proxy 续集 -代码重构" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
+  
+    </div></section>
+  
+
     
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/07/06/关于 Proxy 续集 -代码重构/">关于 Proxy 续集 -代码重构</a>
-    </h1>
-  
-
-        
-        <a href="/2018/07/06/关于 Proxy 续集 -代码重构/" class="archive-article-date">
-  	<time datetime="2018-07-06T10:01:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-07-06</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>上篇文章我们说了静态代理，那么有静态代理自然也就有动态代理咯，这次我们主要说 javaJDK给我提供的 一套动态代理。</p>
-<pre><code>老规矩先看代码,
-</code></pre><p>接口类：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">public interface Hello &#123;</span><br><span class="line">    public void say(String name);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-        
-          <a class="article-more-a" href="/2018/07/06/关于 Proxy 续集 -代码重构/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">Aop</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">JAVA</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/Proxy//" class="article-tag-list-link color1">Proxy</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2018/07/06/关于 Proxy 续集 -代码重构/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-关于 Proxy" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/07/05/关于 Proxy/">关于 Proxy</a>
-    </h1>
-  
-
-        
-        <a href="/2018/07/05/关于 Proxy/" class="archive-article-date">
-  	<time datetime="2018-07-05T10:01:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-07-05</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>大家都用过，但是可能没有仔细去研究过，今天我们一起看看吧。        项目中最直接的就是 事务，日志 ，就是传说中的spring的AOP功能， 今天我们一起来揭露它的神秘面纱吧。         </p>
-<pre><code>首先我们来说说静态代理：   我写了一个接口 
-</code></pre><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">public interface Hello &#123;</span><br><span class="line">    public void say(String name);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-        
-          <a class="article-more-a" href="/2018/07/05/关于 Proxy/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">Aop</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">JAVA</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/Proxy//" class="article-tag-list-link color1">Proxy</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2018/07/05/关于 Proxy/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-springBoot admin 实现对springboot项目的监控-实战" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/07/04/springBoot admin 实现对springboot项目的监控-实战/">springBoot admin 实现对springboot项目的监控-实战</a>
-    </h1>
-  
-
-        
-        <a href="/2018/07/04/springBoot admin 实现对springboot项目的监控-实战/" class="archive-article-date">
-  	<time datetime="2018-07-04T03:30:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-07-04</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p><img src="http://p2.so.qhimgs1.com/bdr/_240_/t015dfe3ea511476242.jpg" alt="image"><br>
-        
-          <a class="article-more-a" href="/2018/07/04/springBoot admin 实现对springboot项目的监控-实战/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">JAVA</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">springBoot</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/安全监控//" class="article-tag-list-link color5">安全监控</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2018/07/04/springBoot admin 实现对springboot项目的监控-实战/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-Mybatis 传参的方式" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/07/02/Mybatis 传参的方式/">Mybatis 传参的方式</a>
-    </h1>
-  
-
-        
-        <a href="/2018/07/02/Mybatis 传参的方式/" class="archive-article-date">
-  	<time datetime="2018-07-02T06:14:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-07-02</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>现在公司在使用Mybatis 做开发,遇到Mybatis传参的问题，刚好总结下，因为之前也没总结归纳过，刚好有时间做个总结。</p>
-<h2 id="方法一"><a href="#方法一" class="headerlink" title="方法一"></a>方法一</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">public User selectUser(String name,int deptId);</span><br><span class="line">&lt;select id=&quot;selectUser&quot; resultMap=&quot;UserResultMap&quot;&gt;</span><br><span class="line">select</span><br><span class="line">    *</span><br><span class="line">from</span><br><span class="line"> user</span><br><span class="line">where</span><br><span class="line"> user_name=#&#123;0&#125; and dept_id = #&#123;1&#125;</span><br><span class="line">&lt;/select&gt;</span><br></pre></td></tr></table></figure>
-        
-          <a class="article-more-a" href="/2018/07/02/Mybatis 传参的方式/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">JAVA</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">数据库</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/Mybatis//" class="article-tag-list-link color3">Mybatis</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2018/07/02/Mybatis 传参的方式/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-ActiveMq 入门" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/06/30/ActiveMq 入门/">ActiveMq 入门</a>
-    </h1>
-  
-
-        
-        <a href="/2018/06/30/ActiveMq 入门/" class="archive-article-date">
-  	<time datetime="2018-06-30T06:14:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-06-30</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>首先我们需要下载 ActiveMq 然后双击activemq.bat 启动 ActiveMq</p>
-<p><img src="https://static.oschina.net/uploads/space/2017/0817/164714_tb08_3394890.png" alt="image"><br>
-        
-          <a class="article-more-a" href="/2018/06/30/ActiveMq 入门/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">JAVA</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">ActiveMq</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/消息队列//" class="article-tag-list-link color5">消息队列</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2018/06/30/ActiveMq 入门/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-  
 
 
           </div>
@@ -744,10 +246,10 @@
     <script>
 	var yiliaConfig = {
 		mathjax: false,
-		isHome: true,
+		isHome: false,
 		isPost: false,
 		isArchive: false,
-		isTag: false,
+		isTag: true,
 		isCategory: false,
 		open_in_new: false,
 		toc_hide_index: true,
