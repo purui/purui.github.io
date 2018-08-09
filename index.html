@@ -423,127 +423,6 @@
 
 
   
-    <article id="post-Zookeeper 入门 (1)" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/08/07/Zookeeper 入门 (1)/">Zookeeper 入门 (1)</a>
-    </h1>
-  
-
-        
-        <a href="/2018/08/07/Zookeeper 入门 (1)/" class="archive-article-date">
-  	<time datetime="2018-08-07T07:36:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-08-07</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>Zookeeper 介绍<br>    Zookeeper是软件世界的一名管理者，它被用来提供分布式环境下的协调服务， Yahoo公司使用JAVA 语言开发了Zookeeper，它是Hadoop项目中的子项目，基于Google的Chubby 的开源实现，在Hadoop，HBase，Kafka等技术中充当了核心角色，它的目标就是将那些复杂且容易出错的分布式一致性服务加以封装，形成一个高效且可靠的服务，并为用户提供了一系列简单易用的接口。</p>
-<pre><code>Zookeeper 官网 ：http://zookeeper.apache.org/
-</code></pre><p>Zookeeper 一般以集群的方式对外提供服务，一个集群包括多个节点，每个节点对应一个zookeeper服务器，所有的节点共同对外提供服务，整个集群对分布式数据一致性提供了全面的支持，具体包含如下五个特性：</p>
-<pre><code>1.顺序性
-
-        好比一个队列，先进先出，一个个排队
-
-2.原子性
-
-        和事务的原子性一致
-
-3.单一性
-
-        Zokeeper 各个节点间 不可能出现两种不一样的数据状态
-
-4.可靠性
-
-        一旦服务器数据发生变化，就会立即被储存起来。
-
-5.实时性
-
-        服务器的请求被处理，客户端能够及时得到最新数据状态
-</code></pre><p>Zookeeper 树状模型<br>    Zookeeper 内部有一个树状的内存模型，类型文件系统，有若干个目录，每一个目录都有自己的文件，只是在Zookeeper中把这个统称为ZNode ，每个ZNode有对应的路径及其包含的数据，ZNode 由Zookeeper 客户端来创建，客户端建立连接后， 服务端会创建一个session， 客户端所有操作都将在这个sessiuon(会话)中进行</p>
-<p><img src="https://static.oschina.net/uploads/space/2017/0819/205659_51h8_3394890.png" alt="image"></p>
-<p>ZNode 有四类节点：</p>
-<pre><code>Persistent(持久节点)            会话结束后，该节点不会删除
-
-Persistent Sequential(之久顺序节点)   会话结束后，该节点不会删除 且节点名中自带自增后缀
-
-Ephemeral(临时节点)           会话结束被删除
-
-Ephemeral Sequentia(临时顺序节点)   会话结束被删除， 且节点名中自带自增后缀
-</code></pre><p>Persistent  AND Persistent Sequential 才能有子节点</p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">分布式</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">高可用</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/Zookeeper//" class="article-tag-list-link color5">Zookeeper</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2018/08/07/Zookeeper 入门 (1)/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
     <article id="post-Zookeeper入门(二)" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -1105,6 +984,99 @@ Ephemeral Sequentia(临时顺序节点)   会话结束被删除， 且节点名�
 
 
   
+    <article id="post-关于 Proxy" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/07/05/关于 Proxy/">关于 Proxy</a>
+    </h1>
+  
+
+        
+        <a href="/2018/07/05/关于 Proxy/" class="archive-article-date">
+  	<time datetime="2018-07-05T10:01:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-07-05</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>大家都用过，但是可能没有仔细去研究过，今天我们一起看看吧。        项目中最直接的就是 事务，日志 ，就是传说中的spring的AOP功能， 今天我们一起来揭露它的神秘面纱吧。         </p>
+<pre><code>首先我们来说说静态代理：   我写了一个接口 
+</code></pre><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">public interface Hello &#123;</span><br><span class="line">    public void say(String name);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+        
+          <a class="article-more-a" href="/2018/07/05/关于 Proxy/#more">more >></a>
+        
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">JAVA</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">Aop</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/Proxy//" class="article-tag-list-link color1">Proxy</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2018/07/05/关于 Proxy/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
   
     <nav id="page-nav">
       <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="extend next" rel="next" href="/page/2/">Next &raquo;</a>
@@ -1214,15 +1186,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">数据库</a>
+                <a href="javascript:void(0)" class="js-tag color4">ActiveMq</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">JAVA</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">ActiveMq</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1231,6 +1199,10 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">高可用</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">数据库</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1246,6 +1218,10 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">Aop</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">支付宝</a>
               </li>
              
@@ -1255,10 +1231,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">springBoot</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">Aop</a>
               </li>
              
               <li class="article-tag-list-item">
