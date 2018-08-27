@@ -146,6 +146,119 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-高性能分布式缓存Redis" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/08/27/高性能分布式缓存Redis/">高性能分布式缓存Redis</a>
+    </h1>
+  
+
+        
+        <a href="/2018/08/27/高性能分布式缓存Redis/" class="archive-article-date">
+  	<time datetime="2018-08-27T14:16:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-08-27</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <blockquote>
+<p>  在项目发展的初期，本地缓存 比如 ehcache ,可以提供快速的数据访问能力，很大程度上减轻了数据库的压力，提升系统 的吞吐量，但是它的局限性也很明显。</p>
+</blockquote>
+<blockquote>
+<p>ehcache 的本质还是一个进程内的缓存技术，所以，它肯定会占用JVM虚拟机的内存，这也给我们本来就很紧张的内存 雪上加霜，如果缓存占内存的比例较大，很有可能就会引发程序的内存溢出， 更会使程序出现多个GC 和 暂停时间延长，影响系统的吞吐量。</p>
+</blockquote>
+<blockquote>
+<p>所以随着项目及业务的发展，本地缓存技术逐渐被分布式缓存技术所代替，当然这并不是否认 本地缓存技术 就没有用武之地，一些场景下 分布式缓存 也会出现它的瓶颈，所以本地缓存和分布式缓存的集合将是一个不错的方案。</p>
+</blockquote>
+<h3 id="画外音"><a href="#画外音" class="headerlink" title="画外音"></a>画外音</h3><blockquote>
+<p>Ehcache 开发团队也意识到这个问题，所以在ehcache3.x 的版本后，提供了off-heap(堆外内存)特性,该特性 可以使 ehcache 避免占用 heap的空间，降低GC 及 暂停次数，来提高吞吐量。</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">off-heap 技术与 JVM 底层机制紧密相关，对于JAVA 开发人员来说，大家都知道，Java程序始终是运行在JVM虚拟机中的，它与宿主环境是隔离的，因为一般给新对象分配 内存都在 heap 中进行，</span><br><span class="line">在java 中 除了 heap 空间外，其他所有内存都可以称为 off-heap</span><br></pre></td></tr></table></figure>
+<h2 id="off-heap-带来的好处"><a href="#off-heap-带来的好处" class="headerlink" title="off-heap 带来的好处"></a>off-heap 带来的好处</h2><ol>
+<li>减少了GC 和暂停次数</li>
+<li>拥有更大的内存空间</li>
+<li>减去了物理内存 与 heap 之间的数据复制</li>
+</ol>
+<p>参考淘宝的TaobaoVM<br>
+        
+          <a class="article-more-a" href="/2018/08/27/高性能分布式缓存Redis/#more">more >></a>
+        
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">分布式</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">缓存</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Nosql</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/Redis//" class="article-tag-list-link color1">Redis</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2018/08/27/高性能分布式缓存Redis/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-Got error 28 from storage engine 解决记录" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -981,99 +1094,6 @@
 
 
   
-    <article id="post-支付宝对接-查询对账单下载地址接口 遇到的坑" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/07/15/支付宝对接-查询对账单下载地址接口 遇到的坑/">支付宝对接-查询对账单下载地址接口 遇到的坑</a>
-    </h1>
-  
-
-        
-        <a href="/2018/07/15/支付宝对接-查询对账单下载地址接口 遇到的坑/" class="archive-article-date">
-  	<time datetime="2018-07-15T07:36:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-07-15</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>**因为公司后面准备开发财务系统，那么支付肯定是必不可少的，本来想找个随手即用的封装好的支付来直接使用，但是在网上找了一圈，没有找到太中意的，于是准备利用周末时间自己来封装一个 开箱即用的 支付模块。</p>
-<hr>
-<p><img src="https://oscimg.oschina.net/oscnet/c4866fce0956f9f4d41f94c5da60cb25874.jpg" alt="image"><br>
-        
-          <a class="article-more-a" href="/2018/07/15/支付宝对接-查询对账单下载地址接口 遇到的坑/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">支付宝</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">账单</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/支付//" class="article-tag-list-link color3">支付</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2018/07/15/支付宝对接-查询对账单下载地址接口 遇到的坑/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
   
     <nav id="page-nav">
       <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="extend next" rel="next" href="/page/2/">Next &raquo;</a>
@@ -1183,14 +1203,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">Mysql</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">磁盘</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">ActiveMq</a>
               </li>
              
@@ -1199,7 +1211,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">数据库</a>
+                <a href="javascript:void(0)" class="js-tag color1">Mysql</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">磁盘</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1208,6 +1224,30 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">高可用</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">数据库</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">邮件</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">附件</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">支付宝</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">账单</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">springBoot</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1223,26 +1263,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">springBoot</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">支付宝</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">账单</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">邮件</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">附件</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">Aop</a>
               </li>
              
@@ -1252,6 +1272,14 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">web接口测试</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">缓存</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">Nosql</a>
               </li>
              
               <li class="article-tag-list-item">
