@@ -16,10 +16,12 @@
 <meta property="og:site_name" content="purui">
 <meta property="og:description" content="家里有两台电脑，我在两台电脑上分别装了一个绿色版的redis，然后通过Redis Desktop Manager 去连接，本地的电脑很轻易就连接上了，另一个电脑上的redis 一直连接不上。   按照网上教程，修改  1.bind 127.0.0.1改为 #bind 127.0.0.1 2.protected-mode yes 改为 protected-mode no 3.加入 daemoniz">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2018-08-28T14:19:38.279Z">
+<meta property="og:image" content="https://bestpurui.cn/img/redis.png">
+<meta property="og:updated_time" content="2018-08-28T14:26:24.919Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="redis集群环境搭建遇到的问题">
 <meta name="twitter:description" content="家里有两台电脑，我在两台电脑上分别装了一个绿色版的redis，然后通过Redis Desktop Manager 去连接，本地的电脑很轻易就连接上了，另一个电脑上的redis 一直连接不上。   按照网上教程，修改  1.bind 127.0.0.1改为 #bind 127.0.0.1 2.protected-mode yes 改为 protected-mode no 3.加入 daemoniz">
+<meta name="twitter:image" content="https://bestpurui.cn/img/redis.png">
   
     <link rel="alternative" href="/atom.xml" title="purui" type="application/atom+xml">
   
@@ -175,7 +177,7 @@
 <p>2.protected-mode yes 改为 protected-mode no</p>
 <p>3.加入 daemonize no(这个是是否在后台启动不占用一个主程窗口)</p>
 <p>重新启动 redis 结果还是连接不上，<br>仔细看 redis 命令行的启动窗口 </p>
-<p>发现 ==:file use C:\Users\purui_zhang\Desktop\redis\redis-server.exe /path/to/redis.conf==</p>
+<p>发现 ==:file use C:\Users\purui_zhang\Desktop\redis\redis-server.exe /path/to/redis.conf==<br><img src="/img/redis.png" alt="image"></p>
 <p>指向了一个 ==/path/to/redis.conf== 的配置文件</p>
 <p>于是 cmd 命令行 在redis 同级目录 执行 redis-server.exe redis.windows.conf 成功启动，并且成功连接。成功。问题记录</p>
 
@@ -468,15 +470,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">分布式</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">高可用</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">数据库</a>
+                <a href="javascript:void(0)" class="js-tag color4">ActiveMq</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -484,19 +478,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">ActiveMq</a>
+                <a href="javascript:void(0)" class="js-tag color4">分布式</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">缓存</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">Nosql</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">集群</a>
+                <a href="javascript:void(0)" class="js-tag color4">高可用</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -508,15 +494,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">数据库</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">邮件</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">附件</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">springBoot</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -532,6 +518,18 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">缓存</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">Nosql</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">集群</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">支付宝</a>
               </li>
              
@@ -540,11 +538,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">阿里云</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">极光推送</a>
+                <a href="javascript:void(0)" class="js-tag color1">springBoot</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -557,6 +551,14 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">web接口测试</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">阿里云</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">极光推送</a>
               </li>
             
             <div class="clearfix"></div>
