@@ -6,19 +6,23 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="https://bestpurui.cn">
-  <title>Tag: Aop | purui</title>
+  <title>论List 集合的深拷贝和浅拷贝 | purui</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="记录个人成长与技术的博客">
-<meta name="keywords" content="java,技术分享,记录个人成长">
-<meta property="og:type" content="website">
-<meta property="og:title" content="purui">
-<meta property="og:url" content="https://bestpurui.cn/tags/Aop/index.html">
+  <meta name="description" content="论List 集合的深拷贝和浅拷贝，这个课题我们得用 java的 栈堆来说明，">
+<meta name="keywords" content="集合,clone,List,Set">
+<meta property="og:type" content="article">
+<meta property="og:title" content="论List 集合的深拷贝和浅拷贝">
+<meta property="og:url" content="https://bestpurui.cn/2018/09/27/论List 集合的深拷贝和浅拷贝/index.html">
 <meta property="og:site_name" content="purui">
-<meta property="og:description" content="记录个人成长与技术的博客">
+<meta property="og:description" content="论List 集合的深拷贝和浅拷贝，这个课题我们得用 java的 栈堆来说明，">
 <meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="https://oscimg.oschina.net/oscnet/35e1a49b9a46a87e481988cdca887d821ed.jpg">
+<meta property="og:image" content="https://oscimg.oschina.net/oscnet/3e2de2f3f2209f8a676ccb1e7aa7f15e9bb.jpg">
+<meta property="og:updated_time" content="2018-09-27T09:15:52.755Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="purui">
-<meta name="twitter:description" content="记录个人成长与技术的博客">
+<meta name="twitter:title" content="论List 集合的深拷贝和浅拷贝">
+<meta name="twitter:description" content="论List 集合的深拷贝和浅拷贝，这个课题我们得用 java的 栈堆来说明，">
+<meta name="twitter:image" content="https://oscimg.oschina.net/oscnet/35e1a49b9a46a87e481988cdca887d821ed.jpg">
   
     <link rel="alternative" href="/atom.xml" title="purui" type="application/atom+xml">
   
@@ -144,128 +148,246 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
-  
-  
+            <article id="post-论List 集合的深拷贝和浅拷贝" class="article article-type-post " itemscope itemprop="blogPost">
+  <div class="article-inner">
     
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2018" class="archive-year">2018</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2018/07/06/关于 Proxy 续集 -代码重构/" class="archive-article-date">
-  	<time datetime="2018-07-06T10:01:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-07-06</time>
-</a>
-        </div>
-    	 
+      <header class="article-header">
+        
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2018/07/06/关于 Proxy 续集 -代码重构/">关于 Proxy 续集 -代码重构</a>
+    <h1 class="article-title" itemprop="name">
+      论List 集合的深拷贝和浅拷贝
     </h1>
   
 
-        <div class="article-info info-on-right">
-          
+        
+        <a href="/2018/09/27/论List 集合的深拷贝和浅拷贝/" class="archive-article-date">
+  	<time datetime="2018-09-27T08:37:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-09-27</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>论List 集合的深拷贝和浅拷贝，这个课题我们得用 java的 栈堆来说明，</p>
+<p><img src="https://oscimg.oschina.net/oscnet/35e1a49b9a46a87e481988cdca887d821ed.jpg" alt="image"><br><a id="more"></a><br>接下来 我们说一下 浅拷贝的实现方式</p>
+<ul>
+<li>遍历循环复制</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">List&lt;Person&gt; destList=new ArrayList&lt;Person&gt;(srcList.size());  </span><br><span class="line">for(Person p : srcList)&#123;  </span><br><span class="line">    destList.add(p);  </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>tips:list 本质上是数组，也是通过引用指向对应的数组(数据)</p>
+<ul>
+<li>使用List实现类的构造方法</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">List&lt;Person&gt; destList=new ArrayList&lt;Person&gt;(srcList);</span><br></pre></td></tr></table></figure>
+<ul>
+<li>使用list.addAll()方法</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">List&lt;Person&gt; destList=new ArrayList&lt;Person&gt;();  </span><br><span class="line">destList.addAll(srcList);</span><br></pre></td></tr></table></figure>
+<p>tips: list.remove() 只是删除了 list 和数组 部分数据的联系 对数据本身并不影响。</p>
+<p>例如： list1.remove() 了，但是list2 不受影响。</p>
+<ul>
+<li>使用System.arraycopy()方法</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Person[] srcPersons=srcList.toArray(new Person[0]);  </span><br><span class="line">Person[] destPersons=new Person[srcPersons.length];  </span><br><span class="line">System.arraycopy(srcPersons, 0, destPersons, 0, srcPersons.length);</span><br></pre></td></tr></table></figure>
+<p>tips: 实际上是 copy了 单个数组数据的地址引用</p>
+<p>以上是浅拷贝</p>
+<p>图解深拷贝</p>
+<p><img src="https://oscimg.oschina.net/oscnet/3e2de2f3f2209f8a676ccb1e7aa7f15e9bb.jpg" alt="image"></p>
+<p>深拷贝就是 把 list1 的内容(数据) copy 给 list2 ， list1 和 list2 指向不同的数据</p>
+<ul>
+<li>使用序列化方法</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">public static &lt;T&gt; List&lt;T&gt; deepCopy(List&lt;T&gt; src) throws IOException, ClassNotFoundException &#123;  </span><br><span class="line">    ByteArrayOutputStream byteOut = new ByteArrayOutputStream();  </span><br><span class="line">    ObjectOutputStream out = new ObjectOutputStream(byteOut);  </span><br><span class="line">    out.writeObject(src);  </span><br><span class="line"></span><br><span class="line">    ByteArrayInputStream byteIn = new ByteArrayInputStream(byteOut.toByteArray());  </span><br><span class="line">    ObjectInputStream in = new ObjectInputStream(byteIn);  </span><br><span class="line">    @SuppressWarnings(&quot;unchecked&quot;)  </span><br><span class="line">    List&lt;T&gt; dest = (List&lt;T&gt;) in.readObject();  </span><br><span class="line">    return dest;  </span><br><span class="line">&#125;  </span><br><span class="line"></span><br><span class="line">List&lt;Person&gt; destList=deepCopy(srcList);  //调用该方法</span><br></pre></td></tr></table></figure>
+<ul>
+<li>clone方法</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">public class A implements Cloneable &#123;   </span><br><span class="line">    public String name[];   </span><br><span class="line"></span><br><span class="line">    public A()&#123;   </span><br><span class="line">        name=new String[2];   </span><br><span class="line">    &#125;   </span><br><span class="line"></span><br><span class="line">    public Object clone() &#123;   </span><br><span class="line">        A o = null;   </span><br><span class="line">        try &#123;   </span><br><span class="line">            o = (A) super.clone();   </span><br><span class="line">        &#125; catch (CloneNotSupportedException e) &#123;   </span><br><span class="line">            e.printStackTrace();   </span><br><span class="line">        &#125;   </span><br><span class="line">        return o;   </span><br><span class="line">    &#125;   </span><br><span class="line">&#125;  </span><br><span class="line">for(int i=0;i&lt;n;i+=)&#123;</span><br><span class="line">copy.add((A)src.get(i).clone());</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+      
+
+      
+        <div class="page-reward">
+          <a href="javascript:;" class="page-reward-btn tooltip-top">
+            <div class="tooltip tooltip-east">
+            <span class="tooltip-item">
+              赏
+            </span>
+            <span class="tooltip-content">
+              <span class="tooltip-text">
+                <span class="tooltip-inner">
+                  <p class="reward-p"><i class="icon icon-quo-left"></i>嘿嘿,谢谢您的赏识<i class="icon icon-quo-right"></i></p>
+                  <div class="reward-box">
+                    
+                    
+                  </div>
+                </span>
+              </span>
+            </span>
+          </div>
+          </a>
+        </div>
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags icon"></i>
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">JAVA</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">集合</a>
         		</li>
       		 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">Aop</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">clone</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">List</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">Set</a>
         		</li>
       		
 		</ul>
 	</div>
 
-          
+      
 	<div class="article-category tagcloud">
 		<i class="icon-book icon"></i>
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="/categories/Proxy//" class="article-tag-list-link color1">Proxy</a>
+        			<a href="/categories/JAVA//" class="article-tag-list-link color5">JAVA</a>
         		</li>
       		
 		</ul>
 	</div>
 
 
+      
+
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
         </div>
-        <div class="clearfix"></div>
-    </header>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//pan.baidu.com/share/qrcode?url=https://bestpurui.cn/2018/09/27/论List 集合的深拷贝和浅拷贝/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
+      
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
+
   
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2018/07/05/关于 Proxy/" class="archive-article-date">
-  	<time datetime="2018-07-05T10:01:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-07-05</time>
-</a>
+<nav id="article-nav">
+  
+  
+    <a href="/2018/08/28/redis集群环境搭建遇到的问题/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">redis集群环境搭建遇到的问题</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
         </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2018/07/05/关于 Proxy/">关于 Proxy</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">JAVA</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">Aop</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/Proxy//" class="article-tag-list-link color1">Proxy</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
+        
+        
+        <div class="toc-container tooltip-left">
+            <i class="icon-font icon-category"></i>
+            <div class="tooltip tooltip-east">
+                <span class="tooltip-item">
+                </span>
+                <span class="tooltip-content">
+                    <div class="toc-article">
+                    目录，不存在的…
+                    </div>
+                </span>
+            </div>
         </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
+        
+    </div>
+</aside>
+
+
+
   
   
-    </div></section>
   
 
-    
+  
+  <div id="SOHUCS" sid="论List 集合的深拷贝和浅拷贝" ></div> 
+<script charset="utf-8" type="text/javascript" src="//changyan.sohu.com/upload/changyan.js" ></script>
+<script type="text/javascript">
+    window.changyan.api.config({
+        appid: "cytHeFrqx",
+        conf: "prod_40cd1555815b1262ee40073493b355fb"
+    });
+</script>
+</script>
+  
+
+  
+
+  
 
 
           </div>
@@ -300,9 +422,9 @@
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: false,
+		isPost: true,
 		isArchive: false,
-		isTag: true,
+		isTag: false,
 		isCategory: false,
 		open_in_new: false,
 		toc_hide_index: true,
